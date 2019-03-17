@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 import sys
 sys.path.append('./')
 
@@ -38,14 +40,15 @@ chrome_options.add_argument('--disable-gpu')
 path_to_extension = './3.41.0_0'
 chrome_options.add_argument('load-extension=' + path_to_extension)
 
-
+print('')
+print('')
 
 for j in range(len(names)):
    driver = webdriver.Chrome(chrome_options=chrome_options, executable_path = './chromedriver')
    print("Loading information for user: " + names[j])
    driver.get('https://' + region + '.op.gg/summoner/userName=' + names[j])
 
-   time.sleep(5)
+   time.sleep(3)
     
    if verbose_mode:
         print("Page loaded.")
