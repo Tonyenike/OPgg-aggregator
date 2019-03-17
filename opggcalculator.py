@@ -21,6 +21,8 @@ for opts in range(len(sys.argv)):
         names.append(sys.argv[opts + 1])
     if sys.argv[opts] == "-r":
         region = sys.argv[opts + 1]
+        if region == "kr":
+            region = ""
     if sys.argv[opts] == "-l":
         limited = True
         limitnum = int(sys.argv[opts + 1])
@@ -41,7 +43,7 @@ chrome_options.add_argument('load-extension=' + path_to_extension)
 for j in range(len(names)):
    driver = webdriver.Chrome(chrome_options=chrome_options, executable_path = './chromedriver')
    print("Loading information for user: " + names[j])
-   driver.get('https://" + region + ".op.gg/summoner/userName=' + names[j])
+   driver.get('https://' + region + '.op.gg/summoner/userName=' + names[j])
 
    time.sleep(5)
     

@@ -13,10 +13,30 @@ If no users are specified, then by default, the aggregator will calculate the OP
 * Lazersquirrel
 * Shmaul Cat
 
-At the moment, this tool can only gather information from users on the NA server. 
 
 ## [options]
 
 `--verbose`
 
 prints more information when gathering OPgg information.
+
+
+`-r [region]`
+
+specifies the region. Valid regions are: 
+
+* na 
+* lan 
+* las
+* br 
+* eune 
+* euw
+* kr 
+* jp 
+* oce 
+* tr
+* ru
+
+`-l [limit-number]`
+
+specifies a cap on the past number of games to calculate. For example, `-l 10` would limit the aggregate calculation to the last 10 games.
