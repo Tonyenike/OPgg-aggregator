@@ -10,12 +10,20 @@ verbose_mode = False
 names = []
 
 specified = False
+limited = False
+region = "na"
+limitnum = 10
 for opts in range(len(sys.argv)):
     if sys.argv[opts] == "--verbose":
         verbose_mode = True
     if sys.argv[opts] == "-u":
         specified = True
         names.append(sys.argv[opts + 1])
+    if sys.argv[opts] == "-r":
+        region = sys.argv[opts + 1]
+    if sys.argv[opts] == "-l":
+        limited = True
+        limitnum = int(sys.argv[opts + 1])
 
 if not specified:
     names = ["MAN OF INTELLECT", "Commandments", "LazerSquirrel", "MunichMonster", "Shmaul Cat"]
@@ -33,7 +41,7 @@ chrome_options.add_argument('load-extension=' + path_to_extension)
 for j in range(len(names)):
    driver = webdriver.Chrome(chrome_options=chrome_options, executable_path = './chromedriver')
    print("Loading information for user: " + names[j])
-   driver.get('https://na.op.gg/summoner/userName=' + names[j])
+   driver.get('https://" + region + ".op.gg/summoner/userName=' + names[j])
 
    time.sleep(5)
     
@@ -80,6 +88,8 @@ for j in range(len(names)):
          total = total + 1
          if verbose_mode:
             print("")
+         if limited and limitnum == total:
+            break;
 
    print("Found " + str(total) + " Flex 5:5 games")
    print("Aggregate OP.GG score: " + str(totalscore / total))
