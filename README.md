@@ -3,9 +3,10 @@
 Directions for use:
 
 
-python opggscorecalculator.py [options] -u [user1] -u [user2] -u [user3] ...
+`python opggscorecalculator.py [options] -u [user1] -u [user2] -u [user3]` ...
 
-[options]
+## [options]
 
---verbose
+`--verbose`
+
 prints more information when gathering OPgg information.
