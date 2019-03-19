@@ -95,6 +95,7 @@ for j in range(len(names)):
         print("Found " + str(len(yote)) + " games in total")
    total = 0
    totalscore = 0
+   runningtotal = 0
    for i in range(len(yote)):
       yeet = yote[i].get_attribute('innerHTML')
       resultinfo = result_detail[i].get_attribute('innerHTML')
@@ -102,13 +103,12 @@ for j in range(len(names)):
       if bol:
          actions = webdriver.ActionChains(driver)
          actions.move_to_element(buttons[i]).click().perform()
-         time.sleep(1)
+         time.sleep(1.5)
          getName = realstuff.find_elements_by_css_selector('td.SummonerName.Cell')
          getScores = driver.find_elements_by_css_selector('div.OPScore.Text')
-         subset = getName[-10:]
          namestuff = []
          for hi in range(10):
-            namestuff.append(subset[hi].find_element_by_tag_name('a').get_attribute('innerHTML'))
+            namestuff.append(getName[runningtotal * 10 + hi].find_element_by_tag_name('a').get_attribute('innerHTML'))
          namesG = [x.lower() for x in namestuff]
          othernames = [x.lower() for x in names]
          goodtogo = True
@@ -119,20 +119,22 @@ for j in range(len(names)):
              if verbose_mode:
                 print(printable_mode + " game " + str(total + 1) + ":")
              for h in range(10):
-                username = getName[total*10 + h].find_element_by_tag_name('a').get_attribute('innerHTML')
+                username = getName[runningtotal*10 + h].find_element_by_tag_name('a').get_attribute('innerHTML')
                 if verbose_mode:
-                    print(username + " " + getScores[total*10 + h].get_attribute('innerHTML'))
+                    print(username + " " + getScores[runningtotal*10 + h].get_attribute('innerHTML'))
                 if names[j].lower() in username.lower():
                     names[j] = username
-                    totalscore = totalscore + float(getScores[total*10 + h].get_attribute('innerHTML'))
+                    totalscore = totalscore + float(getScores[runningtotal*10 + h].get_attribute('innerHTML'))
              total = total + 1
              if verbose_mode:
                 print("")
              if limited and limitnum == total:
                 break;
+         runningtotal = runningtotal + 1
 
    print(names[j] + " aggregate OP.GG score over " + str(total) + " " + printable_mode + " games: " + str(totalscore / total))
-   print("")
-   print("")
+   if verbose_mode:
+        print("")
+        print("")
 
    driver.close()
